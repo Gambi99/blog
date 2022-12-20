@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
@@ -13,11 +14,11 @@ class Comment extends Model
 
     public function post()
     {
-        $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
-        $this->belongsTo(Post::class);
+        return $this->belongsTo(User::class);
     }
 }
