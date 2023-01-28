@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <x-header></x-header>
+    <x-guest.header></x-guest.header>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 mb-20">
 

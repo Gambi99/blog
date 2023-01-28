@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\LoginProcessRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class AuthController extends Controller
@@ -17,13 +17,9 @@ class AuthController extends Controller
         return view('admin.auth.login');
     }
 
-    public function loginProcess(Request $request): Redirector|Application|RedirectResponse
+    public function loginProcess(LoginProcessRequest $request): Redirector|Application|RedirectResponse
     {
-        $data = $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'string'],
-            'password' => ['required']
-        ]);
+        $data = $request->validated();
 
         if (auth('admin')->attempt($data)) {
             return redirect(route('admin.posts.index'));

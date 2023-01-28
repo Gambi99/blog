@@ -51,6 +51,12 @@ class PostController extends Controller
         return redirect(route('admin.posts.index'));
     }
 
+    public function show($id): Factory|View|Application
+    {
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', ['post' => $post]);
+    }
+
     public function destroy(int $id): Application|RedirectResponse|Redirector
     {
         Post::destroy($id);

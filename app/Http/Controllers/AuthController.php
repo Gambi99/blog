@@ -58,7 +58,7 @@ class AuthController extends Controller
         return view('auth.forgot_password');
     }
 
-    public function forgotPasswordProcess(ForgotPasswordRequest $request)
+    public function forgotPasswordProcess(ForgotPasswordRequest $request): Redirector|Application|RedirectResponse
     {
         $data = $request->validated();
 

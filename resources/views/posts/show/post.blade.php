@@ -1,7 +1,8 @@
 @extends('layout.app')
-@section('title', $post->title)
+@section('title', "Блог: $post->title")
 
 @section('content')
+    <x-guest.header></x-guest.header>
 
     <div>
         <div class="m-auto px-4 py-8 max-w-xl">
@@ -23,13 +24,15 @@
                     <form action="{{ route('comment', $post->id) }}" method="post">
                         @csrf
 
-                        <textarea name="text" class="w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" placeholder="Ваш комментарий..." spellcheck="false"></textarea>
+                        @auth()
+                            <textarea name="text" class="w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" placeholder="Ваш комментарий..." spellcheck="false"></textarea>
 
-                        @error('text')
-                        {{ $message }}
-                        @enderror
+                            @error('text')
+                                {{ $message }}
+                            @enderror
 
                         <button type="submit" class="font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg ">Написать </button>
+                        @endauth
                     </form>
 
                     <div id="task-comments" class="pt-4">
@@ -50,5 +53,4 @@
             </div>
         </div>
     </div>
-
 @endsection
